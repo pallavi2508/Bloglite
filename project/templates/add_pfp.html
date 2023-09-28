@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog-lite</title>
+    <link rel="stylesheet" href="/static/style.css"></style>
+</head>
+<body>
+    <form action="{{ url_for("add_pfp", uid=uid ,fid=fid) }}" method ="post" enctype="multipart/form-data">
+        <label for ="user">set Bio</label><br>
+        <input id ="user" type="text" name="bio" placeholder="bio" required>
+        <input type="submit" value="add_pfp">
+    </form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog-lite</title>
+    <link rel="stylesheet" href="/static/style.css"></style>
+</head>
+<body>
+    <form action="{{ url_for("update_post", uid=uid,up_id=up_id) }}" method ="post" enctype="multipart/form-data">
+        <label for ="post">Post picture and caption</label><br>
+        <input id ="post" type="file" name="post_pic" placeholder="post_pic" required>
+        <input id ="post" type="text" name="caption" placeholder="caption" required>
+        <input type="submit" value="update_post">
+    </form>
+</body>
+</html>

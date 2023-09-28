@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css"></style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Following</title>
+</head>
+<body>
+    <div class="navbar">
+		<div class="navbar-right">
+			<a href="/search/{{uid}}"><i class="fa fa-fw fa-search"></i> Search</a>
+			<a href="{{ url_for("user", uid=cuser.user_id,fid=fuser.user_id) }}"><i class="fa fa-fw fa-user"></i> My Profile</a>
+			<a href="/"><i class="fa fa-sign-out"></i> Logout</a>
+		</div>
+	</div>
+    Following:{{ followingcount }}
+    <ul>
+    {% for user_ in followerslist %}
+    <p><a href="{{ url_for("user",uid=cuser.user_id,fid=user_.user_id) }}">{{user_.username}}</a></p>
+    {% endfor %}
+    </ul>
+</body>
+</html>

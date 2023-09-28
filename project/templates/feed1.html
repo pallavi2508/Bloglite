@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/static/style.css"></style>
+    <title>Feed</title>
+</head>
+
+<body>
+	<div class="navbar">
+		<div class="navbar-right">
+			<a href="/search/{{uid}}"><i class="fa fa-fw fa-search"></i> Search</a>
+			<a href="{{ url_for("user", uid=cuser.user_id,fid=cuser.user_id) }}"><i class="fa fa-fw fa-user"></i> My Profile</a>
+			<a href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i> Logout</a>
+		</div>
+	</div>
+
+		<center><h1>Blog Lite - Feed</h1></center>
+    		{% for post in postnlist %}
+			
+			<center><a href="{{ url_for("user", uid=cuser.user_id,fid=post["post_user"]["user_id"]) }}">{{ post["post_user"]["username"] }}</a></center>
+      		<center></h1><h2>{{ post["post"]["title"] }}</h2>
+	  		<img src="data:image/*;charset=utf-8;base64,{{ post['image'] }}" height="500px" width="300px"><br>
+			{% endfor %}
+    	<center><a href="{{ url_for("add_post", uid=uid) }}"><button>Add a new post</button></a></center>
+</body>
+</html>
+
+

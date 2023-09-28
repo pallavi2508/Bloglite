@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/static/style.css"></style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="navbar">
+		<div class="navbar-right">
+			<a href="/search/{{uid}}"><i class="fa fa-fw fa-search"></i> Search</a>
+			<a href="{{ url_for("user", uid=cuser.user_id,fid=cuser.user_id) }}"><i class="fa fa-fw fa-user"></i> My Profile</a>
+			<a href="/"><i class="fa fa-sign-out"></i> Logout</a>
+		</div>
+	</div>
+  <div >
+			</div>
+      <div class="profile-info"> 
+        <h1>{{ fuser.username }}</h1><br>
+        
+        <center><p>{{ fuser.bio }}</p></center>
+        <center><a href="{{ url_for("add_pfp", uid=uid ,fid=fuser.user_id) }}"><button style = "height:40px ; width:90px">set_bio</button></a></center>
+        <p><a href="{{ url_for("following",uid=uid,fid=fuser.user_id) }}"> Following </a></p>
+        <p><a href="{{ url_for("followers",uid=uid,fid=fuser.user_id) }}"> Followers </a></p>
+      <h2>Posts</h2>
+      {% for post in postnlist %}
+      		<center><h2>{{ post["post"]["title"] }}</h2>
+				{{ post["post"]["username"]}}
+        <center><a href="{{ url_for("user", uid=cuser.user_id,fid=post["post_user"]["user_id"]) }}">{{ post["post_user"]["username"] }}</a></center>
+	  		<img src="data:image/*;charset=utf-8;base64,{{ post['image'] }}" height="500px" width="300px"><br>
+            <a href="{{ url_for("update_post", uid=uid,up_id=post["post_user"]["user_id"]) }}"><button style = "height:90px ; width:180px">update post</button></a>
+            <a href="{{ url_for('delete_post',uid=uid,fid=fuser.user_id,id=post["post"]["id"])}}"><button style = "height:90px ; width:180px">Delete</button><a></center>
+			{% endfor %}
+
+    	<center><a href="{{ url_for("add_post", uid=uid) }}"><button>Add a new post</button></a></center>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css"></style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Search</title>
+</head>
+<body>
+    <div class="navbar">
+		<div class="navbar-right">
+			<a href="/search/{{uid}}"><i class="fa fa-fw fa-search"></i> Search</a>
+			<a href="{{ url_for("user", uid=cuser.user_id,fid=cuser.user_id) }}"><i class="fa fa-fw fa-user"></i> My Profile</a>
+			<a href="/"><i class="fa fa-sign-out"></i> Logout</a>
+		</div>
+	</div>
+    <br>
+    <form action="/search/{{uid}}" method="GET">
+        <label for="queryname">search:</label>
+        <input type="text" id="queryname" name="queryname" value="{{ queryname }}">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    <div>
+        {% if resultsname %}
+        <h3>result</h3>
+        <table >
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>USERS</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set count = namespace(value = 1) %}
+                {% for user in resultsname %}
+                <tr>
+                    <td>{{ count.value }}</td>
+                    <td><a href="{{ url_for("user",uid=cuser.user_id,fid=user.user_id) }}">{{user.username}}</a></td>
+                    <td><a href="{{ url_for("followuser",uid=cuser.user_id,fid=user.user_id) }}"><button>Follow</button></a>
+                        <a href="{{ url_for("unfollow",uid=cuser.user_id,fid=user.user_id) }}"><button>UnFollow</button></a>
+                    </td>
+                </tr>
+                {% set count.value = count.value + 1 %}
+                {% endfor %}
+            </tbody>
+        </table><br><br>
+        {% else %}
+            <p> No Results</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
